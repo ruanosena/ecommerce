@@ -82,12 +82,22 @@ function LoadingSkeleton() {
         <div key={i} className="h-full border">
           <Skeleton className="aspect-square w-full" />
           <div className="space-y-3 p-3">
-            <Skeleton className="h-5 w-4/6" />
-            <div className="space-y-2 pb-6">
-              <Skeleton className="h-4 w-5/6" />
-              <Skeleton className="h-4 w-4/6" />
-              <Skeleton className="h-4 w-3/6" />
-              <Skeleton className="h-4 w-3/5" />
+            <div className="py-1">
+              <Skeleton className="h-5 w-4/6" />
+            </div>
+            <div className="pb-6">
+              <div className="py-1">
+                <Skeleton className="h-4 w-5/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-4/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-3/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-3/5" />
+              </div>
             </div>
           </div>
         </div>
