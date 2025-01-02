@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Lora } from "next/font/google";
+import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 
-const lora = Lora({
-  variable: "--font-lora",
+const libre = Libre_Baskerville({
+  variable: "--font-libre",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={lora.className}>{children}</body>
+      <body className={libre.className}>{children}</body>
     </html>
   );
 }
