@@ -5,9 +5,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { delay } from "@/lib/utils";
 import { Suspense } from "react";
-import { getWixClient } from "@/lib/wix-client.base";
 import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getCollectionsBySlug } from "@/wix-api/collections";
+import { queryProducts } from "@/wix-api/products";
 
 export default function Home() {
   return (
@@ -44,20 +45,13 @@ export default function Home() {
 async function FeaturedProducts() {
   await delay(1000);
 
-  const wixClient = getWixClient();
-
-  const { collection } =
-    await wixClient.collections.getCollectionBySlug("destaque");
+  const collection = await getCollectionsBySlug("destaque");
 
   if (!collection?._id) {
     return null;
   }
 
-  const destaque = await wixClient.products
-    .queryProducts()
-    .hasSome("collectionIds", [collection._id])
-    .descending("lastUpdated")
-    .find();
+  const destaque = await queryProducts({ collectionIds: collection._id });
 
   if (!destaque.items.length) {
     return null;
@@ -79,15 +73,25 @@ function LoadingSkeleton() {
   return (
     <div className="flex grid-cols-2 flex-col gap-5 pt-14 sm:grid md:grid-cols-3 lg:grid-cols-4">
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="h-full border">
+        <div key={i} className="h-full border bg-card">
           <Skeleton className="aspect-square w-full" />
           <div className="space-y-3 p-3">
-            <Skeleton className="h-5 w-4/6" />
-            <div className="space-y-2 pb-6">
-              <Skeleton className="h-4 w-5/6" />
-              <Skeleton className="h-4 w-4/6" />
-              <Skeleton className="h-4 w-3/6" />
-              <Skeleton className="h-4 w-3/5" />
+            <div className="py-1">
+              <Skeleton className="h-5 w-4/6" />
+            </div>
+            <div className="pb-6">
+              <div className="py-1">
+                <Skeleton className="h-4 w-5/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-4/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-3/6" />
+              </div>
+              <div className="py-1">
+                <Skeleton className="h-4 w-3/5" />
+              </div>
             </div>
           </div>
         </div>
