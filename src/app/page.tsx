@@ -9,6 +9,7 @@ import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCollectionsBySlug } from "@/wix-api/collections";
 import { queryProducts } from "@/wix-api/products";
+import { getWixServerClient } from "@/lib/wix-client.server";
 
 export default function Home() {
   return (
@@ -45,13 +46,17 @@ export default function Home() {
 async function FeaturedProducts() {
   await delay(1000);
 
-  const collection = await getCollectionsBySlug("destaque");
+  const wixClient = await getWixServerClient();
+
+  const collection = await getCollectionsBySlug(wixClient, "destaque");
 
   if (!collection?._id) {
     return null;
   }
 
-  const destaque = await queryProducts({ collectionIds: collection._id });
+  const destaque = await queryProducts(wixClient, {
+    collectionIds: collection._id,
+  });
 
   if (!destaque.items.length) {
     return null;
