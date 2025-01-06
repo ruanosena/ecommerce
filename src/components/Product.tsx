@@ -25,7 +25,7 @@ export default function Product({ product }: ProductProps) {
         <div className="absolute inset-x-3 bottom-3 flex flex-wrap items-center justify-end gap-2">
           {product.ribbon && <Badge>{product.ribbon}</Badge>}
           {product.discount && <DiscountBadge data={product.discount} />}
-          <Badge className="bg-secondary text-xl font-semibold text-secondary-foreground">
+          <Badge className="bg-secondary text-base font-semibold text-secondary-foreground">
             {getFormattedPrice(product)}
           </Badge>
         </div>

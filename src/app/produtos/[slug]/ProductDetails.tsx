@@ -17,6 +17,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import AddToCartButton from "@/components/AddToCartButton";
+import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
 
 interface ProductDetailsProps {
   product: products.Product;
@@ -101,7 +102,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             {!!availableQuantity &&
               (availableQuantityExceeded || availableQuantity < 10) && (
                 <span className="text-destructive">
-                  Restam apenas {availableQuantity} unidades
+                  {availableQuantity === 1 ? "Resta" : "Restam"} apenas{" "}
+                  {availableQuantity}{" "}
+                  {availableQuantity === 1 ? "unidade" : "unidades"}
                 </span>
               )}
           </div>
@@ -116,7 +119,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             className="w-full"
           />
         ) : (
-          "Produto esgotado"
+          <BackInStockNotificationButton
+            product={product}
+            selectedOptions={selectedOptions}
+            className="w-full"
+          />
         )}
 
         {!!product.additionalInfoSections?.length && (

@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const libre = Libre_Baskerville({
   variable: "--font-libre",
@@ -29,9 +30,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={libre.className}>
         <ReactQueryProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <TooltipProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </TooltipProvider>
         </ReactQueryProvider>
         <Toaster />
       </body>

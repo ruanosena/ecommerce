@@ -1,6 +1,7 @@
 import { products } from "@wix/stores";
 import Badge from "./ui/badge";
 import { Percent } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 interface DiscountBadgeProps {
   data: products.Discount;
@@ -11,9 +12,16 @@ export default function DiscountBadge({ data }: DiscountBadgeProps) {
   }
 
   return (
-    <Badge className="flex items-center text-sm">
-      <span className="text-base">{data.value}</span>
-      <Percent className="size-4" />
-    </Badge>
+    <Tooltip>
+      <TooltipTrigger>
+        <Badge className="flex items-center text-sm">
+          <span>{data.value}</span>
+          <Percent className="size-3.5" />
+        </Badge>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Desconto</p>
+      </TooltipContent>
+    </Tooltip>
   );
 }
