@@ -19,6 +19,7 @@ import { currentCart } from "@wix/ecom";
 import { Loader2, Minus, Plus, ShoppingBag, Trash } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useState } from "react";
+import NavbarButton from "./NavbarButton";
 
 interface ShoppingCartButtonProps {
   initialData: currentCart.Cart | null;
@@ -39,20 +40,23 @@ export default function ShoppingCartButton({
 
   return (
     <>
-      <Button
-        variant="link"
-        className="relative h-auto p-2 [&_svg]:size-10"
+      <NavbarButton
+        variant="ghost"
+        className="relative"
         onClick={() => setSheetOpen(true)}
       >
         <ShoppingBag />
         <span
           className={cn(
-            "absolute bottom-0 right-0 flex size-7 items-center justify-center rounded-full border-[3px] border-background bg-violet-400 font-bold text-foreground",
+            "absolute bottom-0 left-7 flex size-7 items-center justify-center rounded-full border-[3px] border-background bg-violet-400 font-bold text-foreground",
           )}
         >
           {totalQuantity < 10 ? totalQuantity : "9+"}
         </span>
-      </Button>
+        <p className="hidden text-[0.8125rem]/[1rem] sm:block">
+          Sacola de <br /> compras
+        </p>
+      </NavbarButton>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent className="flex flex-col sm:max-w-lg">
           <SheetHeader>
@@ -91,10 +95,10 @@ export default function ShoppingCartButton({
                   <p className="text-lg font-semibold">Sua sacola está vazia</p>
                   <Link
                     href="/loja"
-                    className="text-primary hover:underline"
+                    className="text-primary underline hover:underline"
                     onClick={() => setSheetOpen(false)}
                   >
-                    Começar a comprar agora
+                    Comece a comprar agora
                   </Link>
                 </div>
               </div>

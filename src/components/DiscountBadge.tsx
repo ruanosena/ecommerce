@@ -13,7 +13,7 @@ export default function DiscountBadge({ data }: DiscountBadgeProps) {
 
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger tabIndex={-1}>
         <Badge className="flex items-center text-sm">
           <span>{data.value}</span>
           <Percent className="size-3.5" />
