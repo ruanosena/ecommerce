@@ -8,12 +8,25 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { LogIn, LogOut, UserIcon } from "lucide-react";
+import {
+  Check,
+  LogIn,
+  LogOut,
+  Monitor,
+  Moon,
+  Sun,
+  UserIcon,
+} from "lucide-react";
 import NavbarButton from "@/app/NavbarButton";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 interface UserButtonProps extends ButtonProps {
   loggedInMember: members.Member | null;
@@ -25,6 +38,7 @@ export default function UserButton({
   ...props
 }: UserButtonProps) {
   const { login, logout } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -40,7 +54,7 @@ export default function UserButton({
           )}
         </NavbarButton>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="min-w-44 max-w-64 text-lg">
+      <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] max-w-64">
         {loggedInMember && (
           <>
             <DropdownMenuLabel>
@@ -49,21 +63,47 @@ export default function UserButton({
             <DropdownMenuSeparator />
             <Link href="/perfil">
               <DropdownMenuItem>
-                <UserIcon className="mr-2 size-6" />
+                <UserIcon />
                 Perfil
               </DropdownMenuItem>
             </Link>
             <DropdownMenuSeparator />
           </>
         )}
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <Monitor />
+            Tema
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem onClick={() => setTheme("system")}>
+                <Monitor />
+                Padrão do sistema
+                {theme === "system" && <Check />}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                <Sun />
+                Claro
+                {theme === "light" && <Check />}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <Moon />
+                Escuro
+                {theme === "dark" && <Check />}
+              </DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
         {loggedInMember ? (
           <DropdownMenuItem onClick={() => logout()}>
-            <LogOut className="mr-2 size-6" />
+            <LogOut />
             Sair
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem onClick={() => login()}>
-            <LogIn className="mr-2 size-6" />
+            <LogIn />
             Entrar
           </DropdownMenuItem>
         )}

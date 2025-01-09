@@ -69,3 +69,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+[data-rmiz-modal-overlay="visible"] {
+  background-color: hsl(var(--background));
+}
