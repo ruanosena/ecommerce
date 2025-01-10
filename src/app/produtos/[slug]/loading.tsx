@@ -8,7 +8,7 @@ export default function Loading() {
           <Skeleton className="aspect-square w-full" />
         </div>
         <div className="basis-3/5 space-y-5">
-          <div className="py-1 lg:py-[3px] lg:pb-12">
+          <div className="py-1 lg:py-[0.1875rem] lg:pb-12">
             <Skeleton className="h-6 w-56 lg:h-[1.875rem]" />
           </div>
           <div className="lg:pb-[calc(1.75rem_*_2)]">

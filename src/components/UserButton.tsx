@@ -46,7 +46,7 @@ export default function UserButton({
         <NavbarButton className={className} {...props}>
           <UserIcon />
           {!loggedInMember && (
-            <p className="hidden text-[0.8125rem]/[1rem] sm:block">
+            <p className="hidden text-[0.8125rem]/[1rem] lg:block">
               <strong>Entre ou cadastre-se</strong>
               <br />
               para ver seus pedidos

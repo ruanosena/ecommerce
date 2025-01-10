@@ -53,7 +53,7 @@ export default function ShoppingCartButton({
         >
           {totalQuantity < 10 ? totalQuantity : "9+"}
         </span>
-        <p className="hidden text-[0.8125rem]/[1rem] sm:block">
+        <p className="hidden text-[0.8125rem]/[1rem] lg:block">
           Sacola de <br /> compras
         </p>
       </NavbarButton>
