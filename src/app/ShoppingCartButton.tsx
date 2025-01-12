@@ -20,6 +20,7 @@ import { Loader2, Minus, Plus, ShoppingBag, Trash } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import NavbarButton from "./NavbarButton";
+import CheckoutButton from "@/components/CheckoutButton";
 
 interface ShoppingCartButtonProps {
   initialData: currentCart.Cart | null;
@@ -118,13 +119,13 @@ export default function ShoppingCartButton({
               </p>
             </div>
 
-            <Button
+            <CheckoutButton
               size="lg"
               className="text-lg"
               disabled={!totalQuantity || cartQuery.isFetching}
             >
               Continuar
-            </Button>
+            </CheckoutButton>
           </div>
         </SheetContent>
       </Sheet>
