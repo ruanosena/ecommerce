@@ -112,7 +112,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </div>
 
         {inStock ? (
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2.5 sm:flex-nowrap">
             <AddToCartButton
               product={product}
               selectedOptions={selectedOptions}
@@ -125,6 +125,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               selectedOptions={selectedOptions}
               quantity={quantity}
               disabled={availableQuantityExceeded || quantity < 1}
+              className="w-full sm:w-auto"
             />
           </div>
         ) : (
