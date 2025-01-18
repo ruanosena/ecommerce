@@ -19,7 +19,7 @@ import { currentCart } from "@wix/ecom";
 import { Loader2, Minus, Plus, ShoppingBag, Trash } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import NavbarButton from "./NavbarButton";
+import BigIconButton from "./NavbarButton";
 import CheckoutButton from "@/components/CheckoutButton";
 
 interface ShoppingCartButtonProps {
@@ -41,7 +41,7 @@ export default function ShoppingCartButton({
 
   return (
     <>
-      <NavbarButton
+      <BigIconButton
         variant="ghost"
         className="relative"
         onClick={() => setSheetOpen(true)}
@@ -57,7 +57,7 @@ export default function ShoppingCartButton({
         <p className="hidden text-[0.8125rem]/[1rem] lg:block">
           Sacola de <br /> compras
         </p>
-      </NavbarButton>
+      </BigIconButton>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent className="flex flex-col sm:max-w-lg">
           <SheetHeader>

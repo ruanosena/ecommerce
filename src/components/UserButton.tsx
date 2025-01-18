@@ -24,7 +24,7 @@ import {
   Sun,
   UserIcon,
 } from "lucide-react";
-import NavbarButton from "@/app/NavbarButton";
+import BigIconButton from "@/app/NavbarButton";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
@@ -43,7 +43,7 @@ export default function UserButton({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <NavbarButton className={className} {...props}>
+        <BigIconButton className={className} {...props}>
           <UserIcon />
           {!loggedInMember && (
             <p className="hidden text-[0.8125rem]/[1rem] lg:block">
@@ -52,7 +52,7 @@ export default function UserButton({
               para ver seus pedidos
             </p>
           )}
-        </NavbarButton>
+        </BigIconButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] max-w-64">
         {loggedInMember && (

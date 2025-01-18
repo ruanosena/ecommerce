@@ -8,6 +8,13 @@ import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
+import { products } from "@wix/stores";
+import { getLoggedInMember } from "@/wix-api/members";
+import CreateProductReviewButton from "@/components/reviews/CreateProductReviewButton";
+import ProductReviews, {
+  ProductReviewsLoadingSkeleton,
+} from "./ProductReviews";
+import { getProductReviews } from "@/wix-api/reviews";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -43,6 +50,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   await delay(3000);
+
   const { slug } = await params;
   const product = await getProductBySlug(await getWixServerClient(), slug);
 
@@ -55,6 +63,13 @@ export default async function Page({ params }: PageProps) {
       <Suspense fallback={<RelatedProductsLoadingSkeleton />}>
         <RelatedProducts productId={product._id} />
       </Suspense>
+      <Separator />
+      <div className="space-y-5">
+        <h2 className="text-2xl font-bold">Avaliações de compradores</h2>
+        <Suspense fallback={<ProductReviewsLoadingSkeleton />}>
+          <ProductReviewsSection product={product} />
+        </Suspense>
+      </div>
     </main>
   );
 }
@@ -112,6 +127,40 @@ function RelatedProductsLoadingSkeleton() {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+interface ProductReviewsSectionProps {
+  product: products.Product;
+}
+
+async function ProductReviewsSection({ product }: ProductReviewsSectionProps) {
+  if (!product._id) return null;
+
+  const wixClient = await getWixServerClient();
+
+  const loggedInMember = await getLoggedInMember(wixClient);
+
+  const existingReview = loggedInMember?.contactId
+    ? (
+        await getProductReviews(wixClient, {
+          productId: product._id,
+          contactId: loggedInMember.contactId,
+        })
+      ).items[0]
+    : null;
+
+  await delay(5000);
+
+  return (
+    <div className="space-y-5">
+      <CreateProductReviewButton
+        product={product}
+        loggedInMember={loggedInMember}
+        hasExistingReview={!!existingReview}
+      />
+      <ProductReviews product={product} />
     </div>
   );
 }

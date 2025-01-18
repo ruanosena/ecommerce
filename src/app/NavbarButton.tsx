@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export default function NavbarButton({
+export default function BigIconButton({
   className,
   children,
   ...props

@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import NavbarButton from "./NavbarButton";
+import BigIconButton from "./NavbarButton";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { collections } from "@wix/stores";
@@ -52,9 +52,9 @@ export default function MobileMenu({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <NavbarButton className={className} {...props}>
+        <BigIconButton className={className} {...props}>
           <Menu />
-        </NavbarButton>
+        </BigIconButton>
       </SheetTrigger>
       <SheetContent side="left">
         <SheetHeader>
