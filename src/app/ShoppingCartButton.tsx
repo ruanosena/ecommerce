@@ -232,9 +232,8 @@ function ShoppingCartItem({
 
           <div>
             <Button
-              variant="secondary"
               size="icon"
-              className="text-muted-foreground"
+              className="bg-secondary text-muted-foreground hover:bg-secondary/80"
               onClick={() => removeItemMutation.mutate(productId)}
             >
               <Trash />

@@ -24,8 +24,10 @@ export default function BuyNowButton({
     <LoadingButton
       onClick={() => startCheckoutFlow({ product, quantity, selectedOptions })}
       loading={pending}
-      variant="secondary"
-      className={cn("flex gap-3", className)}
+      className={cn(
+        "flex gap-3 bg-violet-500 text-primary-foreground hover:bg-violet-500/80",
+        className,
+      )}
       {...props}
     >
       <CreditCardIcon />

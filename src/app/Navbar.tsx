@@ -38,9 +38,7 @@ export default async function Navbar() {
             className="flex items-center gap-2 text-nowrap sm:gap-4"
           >
             <Image src={logo} alt="Ruan Store logo" width={40} height={40} />
-            <span className="hidden text-xl font-bold sm:inline md:hidden xl:inline">
-              Ruan Store
-            </span>
+            <span className="text-xl font-bold">Ruan Store</span>
           </Link>
 
           <MainNavigation
@@ -53,7 +51,7 @@ export default async function Navbar() {
 
         <div className="flex items-center justify-center gap-2">
           <UserButton
-            className="hidden md:inline-flex"
+            className="hidden lg:inline-flex"
             loggedInMember={loggedInMember}
           />
           <ShoppingCartButton initialData={cart} />
